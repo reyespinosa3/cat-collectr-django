@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import CatForm, LoginForm
 from .models import Cat
+import logging
 
 
 # Create your views here.
@@ -14,10 +15,12 @@ def index(request):
     form = CatForm()
     return render(request, 'index.html', { 'cats':cats, 'form':form })
 
+# show details for individual cat
 def show(request, cat_id):
     cat = Cat.objects.get(id=cat_id)
     return render(request, 'show.html', {'cat': cat})
 
+# enter new cat information form
 def post_cat(request):
     form = CatForm(request.POST)
     if form.is_valid:
@@ -26,11 +29,13 @@ def post_cat(request):
         cat.save()
     return HttpResponseRedirect('/')
 
+# show collection of cats that user enters
 def profile(request, username):
     user = User.objects.get(username=username)
     cats = Cat.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'cats': cats})
 
+# user login form
 def login_view(request):
     if request.method == 'POST':
         # if post, then authenticate (user submitted username and password)
@@ -42,19 +47,24 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    print("user is active")
                     return HttpResponseRedirect('/')
                 else:
                     print("The account has been disabled.")
+                return HttpResponse('/')
             else:
                 print("The username and/or password is incorrect.")
+            return HttpResponseRedirect('/')
     else:
         form = LoginForm()
-        return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
 
+# logout link
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+# button to 'like' a cat, show up on each cat
 def like_cat(request):
     cat_id = request.GET.get('cat_id', None)
 
