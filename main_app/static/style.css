@@ -1,0 +1,27 @@
+h1 {
+	color: red;
+  text-align: center;
+}
+
+h2 {
+  color: red;
+  text-align: center;
+}
+p {
+  color: blue;
+  font-size: 26px;
+  text-align: center;
+}
+
+form {
+  text-align: center;
+  margin-left: 150px;
+}
+
+input {
+  margin-left: 150px;
+}
+
+a {
+  font-size: 20px;
+}

@@ -1,0 +1,19 @@
+<!-- main_app/templates/show.html -->
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CatCollectr</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+  </head>
+  <body>
+    <a href="/"><h1>CatCollectr</h1></a>
+
+    <h2> Name: {{ cat.name }}</h1>
+    <p> Breed: {{ cat.breed }}</p>
+    <p> Description: {{ cat.description }}</p>
+    <p> Age: {{ cat.age }}</p>
+  </body>
+</html>

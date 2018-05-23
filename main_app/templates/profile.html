@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<h4>{{ username }}'s collection:</h4>
+
+<hr/>
+{% for cat in cats %}
+  <a href="/{{cat.id}}">
+    <p>Name: {{ cat.name }}</p>
+    {% if cat.age > 0 %}
+      <p>Age: {{ cat.age }}</p>
+    {% else %}
+      <p>Age: Kitten</p>
+    {% endif %}
+  </a>
+<hr/>
+{% endfor %}
+
+{% endblock %}
